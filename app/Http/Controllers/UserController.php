@@ -9,7 +9,7 @@ class UserController extends Controller
 {
    function userRegistration(Request $request){
 
-    User::create([
+    try{User::create([
         'firstname'=>$request->input('firstname'),
         'lastname'=>$request->input('lastname'), 
         'email'=>$request->input('email'),
@@ -17,6 +17,11 @@ class UserController extends Controller
         'password'=>$request->input('password'),
     ]);
 
+    return response()->json(['status' => "success",'message'=>'User Created Successfully'],200);}
+    catch(Exception ){
+        
+        return response()->json(['status' => "error",'message'=>'Something went wrong'],500)
 
    } 
+} 
 }
